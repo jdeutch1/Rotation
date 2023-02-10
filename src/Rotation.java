@@ -7,7 +7,6 @@
     Sept. 2022 @ Menlo School
 */
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.lang.String;
@@ -18,8 +17,8 @@ public class Rotation
     /** Instance Variables **/
     private Die d1;
     private Die d2;
-    private int sum1;
-    private int sum2;
+    private int val1;
+    private int val2;
     private int sum;
     private Image die1;
     private Image die2;
@@ -32,7 +31,7 @@ public class Rotation
     private boolean isGameWon;
     boolean isMinBonusUsed;
     boolean isMaxBonusUsed;
-    private RotationViewer r;
+    private RotationViewer observer;
 
     public Rotation()
     {
@@ -43,7 +42,7 @@ public class Rotation
         // Game variables
         isGameWon = false;
         isMinBonusUsed = false;
-        isMaxBonusUsed = true;
+        isMaxBonusUsed = false;
 
         // Array holding which numbers have been rolled
         rolls = new boolean[12];
@@ -52,8 +51,10 @@ public class Rotation
             rolls[i] = false;
         }
 
-        r = new RotationViewer(this);
+        // Initialize viewer/observer
+        observer = new RotationViewer(this);
 
+        // Initialize the die images in an array
         dieImages = new Image[6];
 
         die1 = new ImageIcon("Resources/dice1.png").getImage();
@@ -69,7 +70,6 @@ public class Rotation
         dieImages[3] = die4;
         dieImages[4] = die5;
         dieImages[5] = die6;
-
     }
 
     // Prints instructions into console
@@ -110,9 +110,6 @@ public class Rotation
         }
         if (counter == 0)
         {
-            System.out.println();
-            System.out.println("GAME OVER! You had a score of "
-                    + d1.getTimesRolled());
             isGameWon = true;
             return true;
         }
@@ -135,9 +132,9 @@ public class Rotation
         // Roll dice and print sum
         System.out.println("Rolling the first die...");
         System.out.println("Rolling the second die...");
-        sum1 = d1.roll();
-        sum2 = d2.roll();
-        sum = sum1 + sum2;
+        val1 = d1.roll();
+        val2 = d2.roll();
+        sum = val1 + val2;
         System.out.println("The sum is " + sum);
 
         // Determine if sum has been found or not, then update rolls
@@ -169,9 +166,9 @@ public class Rotation
         // Roll dice 4x and get minimum
         System.out.println("Rolling the first die 4x...");
         System.out.println("Rolling the second die 4x...");
-        sum1 = d1.getMinRoll(4);
-        sum2 = d2.getMinRoll(4);
-        int minSum = sum1 + sum2;
+        val1 = d1.getMinRoll(4);
+        val2 = d2.getMinRoll(4);
+        int minSum = val1 + val2;
         System.out.println("The sum is " + minSum);
 
         // Determine if sum has been found or not, then update rolls
@@ -203,12 +200,12 @@ public class Rotation
         int roundNumber = d1.getTimesRolled() + 1;
         System.out.println("Round " + roundNumber);
 
-        //Roll dice 4x and get maximum
+        // Roll dice 4x and get maximum
         System.out.println("Rolling the first die 4x...");
         System.out.println("Rolling the second die 4x...");
-        sum1 = d1.getMaxRoll(4);
-        sum2 = d2.getMaxRoll(4);
-        int maxSum = sum1 + sum2;
+        val1 = d1.getMaxRoll(4);
+        val2 = d2.getMaxRoll(4);
+        int maxSum = val1 + val2;
         System.out.println("The sum is " + maxSum);
 
         // Determine if sum has been found or not, then update rolls
@@ -223,7 +220,7 @@ public class Rotation
         }
         isMaxBonusUsed = true;
 
-        //Update available uses of bonus
+        // Update available uses of bonus
         rolls[maxSum - 2] = true;
     }
 
@@ -231,8 +228,8 @@ public class Rotation
      * Contains main loop of game
      * Continues until the game has been won
      */
-    public void playGame() {
-
+    public void playGame()
+    {
         // Make scanner object
         Scanner s = new Scanner(System.in);
 
@@ -243,11 +240,15 @@ public class Rotation
         {
             if (isGameOver())
             {
+                System.out.println();
+                System.out.println("GAME OVER! You had a score of "
+                        + d1.getTimesRolled());
                 break;
             }
             else
             {
-                r.repaint();
+                // Repaint at the beginning of each round
+                observer.repaint();
 
                 System.out.println();
 
@@ -273,38 +274,40 @@ public class Rotation
                     playMaxRound();
                 }
 
-                r.repaint();
+                observer.repaint();
             }
         }
     }
 
     public void draw(Graphics g)
     {
+        // Figure out if bonus used or not
+        // If bonus used, draw line through
         g.setColor(Color.RED);
-        if (isMaxBonusUsed) {
-            //FILL OUT
-//            g.drawRect();
+        if (isMaxBonusUsed)
+        {
+            g.fillRect(220, 107, 65, 5);
         }
 
-        if (isMinBonusUsed){
-            //FILL OUT
-//            g.drawLine();
+        if (isMinBonusUsed)
+        {
+            g.fillRect(310, 107, 65, 5);
         }
 
+        // Draw number of turns
         g.setColor(Color.WHITE);
-        g.setFont(new Font("SansSerif", Font.BOLD, 28));
-
-        //FIX THE PLACEMENT
+        g.setFont(new Font("SansSerif", Font.ITALIC, 28));
         g.drawString(String.valueOf(d1.getTimesRolled()), 110, 55);
 
+        // Draw the die numbers that were rolled for the round
         if (d1.getTimesRolled() != 0)
         {
-            g.drawImage(dieImages[sum1 - 1], 200, 200, 50, 50, r);
-            g.drawImage(dieImages[sum2 - 1], 300, 200, 50, 50, r);
+            g.drawImage(dieImages[val1 - 1], 100, 275, 100, 100, observer);
+            g.drawImage(dieImages[val2 - 1], 250, 275, 100, 100, observer);
         }
 
+        // Draw whether a number has been reached or not
         g.setColor(Color.GREEN);
-
         int XCorner = 575;
         int YCorner = 110;
         for (int i = 0; i < rolls.length; i++)
@@ -316,8 +319,8 @@ public class Rotation
             YCorner += 55;
         }
 
+        // Print the instructions of the game
         g.setColor(Color.WHITE);
-
         g.setFont(new Font("SansSerif", Font.BOLD, 18));
         g.drawString("RULES OF THE GAME", 10, 560);
 
@@ -330,11 +333,14 @@ public class Rotation
         g.drawString("'roll', 'max', or 'min' into the console", 10, 660);
         g.drawString("Happy Rolling!", 10, 685);
 
+        // Draw game over screen
         if (isGameOver())
         {
+            g.setColor(Color.WHITE);
+            g.fillRect(0,0,700,700);
             g.setColor(Color.BLACK);
-            g.setFont(new Font("SansSerif", Font.BOLD, 45));
-            g.drawString("GAME OVER!", 300, 350);
+            g.setFont(new Font("SansSerif", Font.BOLD, 55));
+            g.drawString("GAME OVER!", 170, 350);
         }
     }
 

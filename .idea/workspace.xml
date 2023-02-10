@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0278efab-fbba-40d1-bd1d-dee908e95b6f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Resources/background.png" afterDir="false" />
+    <list default="true" id="0278efab-fbba-40d1-bd1d-dee908e95b6f" name="Changes" comment="Initial draft -- Need to include some positioning">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Die.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Die.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/dice1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/dice1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Rotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rotation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RotationViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RotationViewer.java" afterDir="false" />
     </list>
@@ -35,13 +36,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Resources" />
@@ -56,6 +60,18 @@
       <option name="presentableId" value="Default" />
       <updated>1675453390957</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial draft -- Need to include some positioning">
+      <created>1676013954188</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676013954188</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial draft -- Need to include some positioning" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial draft -- Need to include some positioning" />
   </component>
 </project>
